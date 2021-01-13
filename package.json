@@ -9,7 +9,9 @@
     "@babel/node": "^7.12.10",
     "@babel/preset-env": "^7.12.11",
     "dotenv": "^8.2.0",
+    "graphql-tools": "^7.0.2",
     "graphql-yoga": "^1.18.3",
+    "merge-graphql-schemas": "^1.7.8",
     "micromatch": "^4.0.2",
     "morgan": "^1.10.0"
   },
