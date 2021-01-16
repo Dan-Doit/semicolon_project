@@ -1,33 +1,68 @@
 export const USER_FRAGMENT = `
-fragment UserParts on User{
     id
-    username
-    email
     firstName
     lastName
-    bio
-    posts {
-        id
-        caption
-        location
-    }
-}
+    username
+    avatar
 `;
 
 export const COMMENT_FRAGMENT = `
-fragment UserParts on Comment{
-      id
-      text
-      user{
-        username
-      }
+    id
+    text
+    user {
+        ${USER_FRAGMENT}
     }
 `;
 
-export const LIKE_FRAGMENT = `
-fragment UserParts on likeUsers{
-      user{
-        username
-      }
+export const FILE_FRAGMENT = `
+    id
+    url
+`;
+
+
+export const FULL_POST_FRAGMENT = `
+    fragment PostParts on Post{
+        id
+        location
+        caption
+        files {
+            ${FILE_FRAGMENT}
+        }
+        comments {
+            ${COMMENT_FRAGMENT}
+        }
+        user {
+            ${USER_FRAGMENT}
+        }
+        likes{
+          id
+          user{
+            ${USER_FRAGMENT}
+          }
+        }
+    }
+`;
+
+export const MESSAGE_FRAGMENT = `
+    id
+    text
+    to {
+        ${USER_FRAGMENT}
+    }
+    from {
+        ${USER_FRAGMENT}
+    }
+`;
+
+
+export const ROOM_FRAGMENT = `
+    fragment RoomParts on Room {
+        id
+        participants {
+            ${USER_FRAGMENT}
+        }
+        messages { 
+            ${MESSAGE_FRAGMENT}
+        }
     }
 `;
