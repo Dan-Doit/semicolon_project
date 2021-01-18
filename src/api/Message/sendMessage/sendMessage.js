@@ -23,7 +23,7 @@ export default {
         room = await prisma.room({ id: roomId }).$fragment(ROOM_FRAGMENT);
       }
       if (!room) {
-        throw Error("Room not found");
+        throw Error("Woops! Room not found");
       }
       const getTo = room.participants.filter(
         participant => participant.id !== user.id

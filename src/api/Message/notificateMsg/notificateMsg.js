@@ -14,7 +14,7 @@ export default {
                 }).node();
 
             },
-            // crud 형태의 subscript의 resolve는 
+            // crud 형태의 subscript의 resolve는 쿼리 뮤테이션 서브스크립션 유저링크를 실행한다.
             resolve: payload => payload
         }
     }
