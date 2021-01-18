@@ -6,9 +6,10 @@ export default {
         requestSecret: async (_, args, { request }) => {
             const { email } = args;
             const loginSecret = generateSecret();
+
             try {
                 console.log(loginSecret);
-                await sendSecretMail("spqjeks@naver.com",loginSecret);
+                await sendSecretMail(email,loginSecret);
                 await prisma.updateUser({ data: { loginSecret }, where: { email } });
                 return true;
             } catch (error) {
