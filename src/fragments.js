@@ -40,6 +40,7 @@ export const FULL_POST_FRAGMENT = `
             ${USER_FRAGMENT}
           }
         }
+        createdAt
     }
 `;
 
