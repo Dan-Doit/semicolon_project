@@ -5,6 +5,23 @@ export default {
     fullName: parent => {
       return `${parent.firstName} ${parent.lastName}`;
     },
+    followingCount: (parent) =>
+            prisma
+                .usersConnection({ where: { followers_some: { id:parent.id } } })
+                .aggregate()
+        .count(),
+    
+    followersCount: (parent) =>
+            prisma
+                .usersConnection({ where: { following_some: { id:parent.id } } })
+                .aggregate()
+        .count(),
+    postsCount: (parent) => 
+                 prisma
+                .postsConnection({ where: { user: { id:parent.id } } })
+                .aggregate()
+        .count(),
+    
     isFollowing: async (parent, _, { request }) => {
       const { user } = request;
       const { id: parentId } = parent;

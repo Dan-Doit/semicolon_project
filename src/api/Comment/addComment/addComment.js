@@ -1,5 +1,6 @@
 import { prisma } from "../../../../generated/prisma-client";
 import { isAuthenticated } from "../../../middlewares"
+import { COMMENT_FRAGMENT } from "../../../fragments";
 
 export default {
     Mutation: {
@@ -19,7 +20,7 @@ export default {
                     }
                 },
                 text
-            });
+            }).$fragment(COMMENT_FRAGMENT);
             return addComment;
         }
     }

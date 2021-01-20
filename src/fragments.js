@@ -7,11 +7,13 @@ export const USER_FRAGMENT = `
 `;
 
 export const COMMENT_FRAGMENT = `
+{
     id
     text
     user {
         ${USER_FRAGMENT}
     }
+}
 `;
 
 export const FILE_FRAGMENT = `
@@ -28,9 +30,8 @@ export const FULL_POST_FRAGMENT = `
         files {
             ${FILE_FRAGMENT}
         }
-        comments {
+        comments 
             ${COMMENT_FRAGMENT}
-        }
         user {
             ${USER_FRAGMENT}
         }
@@ -66,4 +67,14 @@ export const ROOM_FRAGMENT = `
             ${MESSAGE_FRAGMENT}
         }
     }
+`;
+
+export const SEARCH_FRAGMENT = `
+{
+    id
+          files {
+        id
+        url
+      }
+}
 `;

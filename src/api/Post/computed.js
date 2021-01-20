@@ -23,6 +23,13 @@ export default {
             prisma.likesConnection({
                 where: { post: {id:parent.id}}
             }).aggregate()
-                .count()
+                .count(),
+        
+        commentCount: (parent) => 
+            prisma.commentsConnection({
+                where: { post: { id: parent.id } }
+            }).aggregate()
+                .count(),
+
     }
 }

@@ -14,5 +14,5 @@ export default {
             await prisma.createUser({ username, email, firstName, lastName, bio });
             return true;
         } 
-    }
+    }  
 };
