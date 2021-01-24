@@ -9,7 +9,7 @@ export default {
 
             try {
                 console.log(loginSecret);
-                await sendSecretMail(email, loginSecret);
+                // await sendSecretMail(email, loginSecret);
                 await prisma.updateUser({ data: { loginSecret }, where: { email } });
                 return true;
             } catch (error) {
@@ -19,3 +19,4 @@ export default {
         }
     }
 }
+
