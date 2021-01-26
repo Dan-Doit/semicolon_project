@@ -4,6 +4,7 @@ import logger from 'morgan';
 import schema from './schema';
 import passport from 'passport';
 import { authenticateJwt } from './passport';
+import { uploadMiddleware, uploadController } from './upload';
 
 const PORT = process.env.PORT;
 
@@ -11,5 +12,6 @@ const server = new GraphQLServer({ schema, context: ({ request }) => ({ request 
 
 server.express.use(logger('dev'));
 server.express.use(authenticateJwt);
+server.express.post("/api/Upload", uploadMiddleware, uploadController);
 
 server.start({ port:PORT },()=>console.log(`(●'◡'●) Server running on port http://localhost:${PORT}`));
