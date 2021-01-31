@@ -7,7 +7,6 @@ export const getWeather = async (latitude,longitude) => {
         try {
             const { data: { main: { temp }, weather:[{ main }]}} = await axios.get(`http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${weatherKey}&units=metric`);
             const data = { temp: temp, weather: main };
-            console.log(data);
             return data;
         } catch (e) { 
             console.log("위치 정보가 없어요");
