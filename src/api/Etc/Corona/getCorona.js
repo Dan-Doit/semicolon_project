@@ -6,7 +6,6 @@ export default {
             const { location } = args;
             const data = await covid19();
             const { newCase } = data[location];
-            console.log(newCase);
             return newCase;
         }
     }
