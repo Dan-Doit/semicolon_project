@@ -5,8 +5,9 @@ export default {
         covid19: async (_, args) => { 
             const { location } = args;
             const data = await covid19();
-            const { newCase } = data[location];
-            return newCase;
+            const { newCase, countryName } = data[location];
+            console.log(newCase, countryName)
+            return { newCase, countryName };
         }
     }
 

@@ -11,8 +11,13 @@ type User {
   posts: [Post!]! @relation(name:"PostToUser" onDelete:CASCADE)
   likes: [Like!]! @relation(name:"LikeToUser" onDelete:CASCADE)
   comments: [Comment!]! @relation(name:"CommentToUser" onDelete:CASCADE)
+  commentLikes : [Comment!] @relation(name:"CommentLikesToUser")
   rooms: [Room!]!
   loginSecret: String
+  savedPosts: [Post!] @relation(name:"SavedByUser")
+  state : String! @default(value: "1")
+  stories : [Story!] @relation(name:"StoriesToUser", onDelete:CASCADE)
+  tagedUser : [Story!] @relation(name:"TagToStory")
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }
@@ -25,9 +30,24 @@ type Post {
   files: [File!]! @relation(name:"FileToPost" onDelete:CASCADE)
   likes: [Like!]! @relation(name:"LikeToPost" onDelete:CASCADE)
   comments: [Comment!]! @relation(name:"CommentToPost" onDelete:CASCADE)
+  savedByUser : [User!] @relation(name:"SavedByUser")
+  state : String! @default(value: "1")
+  hash : [String!]! @scalarList(strategy: RELATION)
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }
+
+
+type Story {
+  id:ID! @id
+  files: [File!]!
+  caption : String
+  user : User! @relation(name:"StoriesToUser")
+  tagUser : [User!] @relation(name:"TagToStory", onDelete:CASCADE)
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
+
 
 type Like {
   id: ID! @id
@@ -42,6 +62,7 @@ type Comment {
   text: String!
   user: User! @relation(name:"CommentToUser")
   post: Post! @relation(name:"CommentToPost")
+  commentLikes : [User!] @relation(name:"CommentLikesToUser")
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }
