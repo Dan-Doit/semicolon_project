@@ -37,6 +37,11 @@ type Post {
   updatedAt: DateTime! @updatedAt
 }
 
+type UserLogin{
+  id: ID! @id
+  email: String! @unique
+  loginSecret:String
+}
 
 type Story {
   id:ID! @id
@@ -47,7 +52,6 @@ type Story {
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }
-
 
 type Like {
   id: ID! @id
@@ -63,6 +67,14 @@ type Comment {
   user: User! @relation(name:"CommentToUser")
   post: Post! @relation(name:"CommentToPost")
   commentLikes : [User!] @relation(name:"CommentLikesToUser")
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
+
+type CommentLike {
+  id: ID! @id
+  user: User! @relation(name:"CommentLikesOfUser")
+  comment: Comment! @relation(name:"CommentOfCommentLike")
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }

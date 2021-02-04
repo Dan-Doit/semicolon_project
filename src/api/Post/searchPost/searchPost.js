@@ -1,15 +1,21 @@
 import { prisma } from "../../../../generated/prisma-client";
-import { SEARCH_FRAGMENT } from "../../../fragments";
 
 export default {
     Query: {
-        searchPost: async (_, args) => await prisma.posts({
-            where: {
-                OR: [
-                    { location_starts_with : args.term},
-                    { caption_starts_with : args.term}
-                ]
+        searchPost: async (_, args) => {
+            const { term } = args;
+            try {
+                return prisma.posts({
+                    where: {
+                        OR: [
+                            { caption_contains: term },
+                            { location_starts_with: term }]
+                    }
+                })
+            } catch (e) {
+                console.log(e);
+                return false;
             }
-        }).$fragment(SEARCH_FRAGMENT)
+        }
     }
 }
