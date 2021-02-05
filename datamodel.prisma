@@ -1,5 +1,6 @@
 type User {
   id: ID! @id
+  password:String!
   username: String! @unique
   email: String! @unique
   firstName: String @default(value: "")
@@ -13,7 +14,6 @@ type User {
   comments: [Comment!]! @relation(name:"CommentToUser" onDelete:CASCADE)
   commentLikes : [Comment!] @relation(name:"CommentLikesToUser")
   rooms: [Room!]!
-  loginSecret: String
   savedPosts: [Post!] @relation(name:"SavedByUser")
   state : String! @default(value: "1")
   stories : [Story!] @relation(name:"StoriesToUser", onDelete:CASCADE)

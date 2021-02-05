@@ -1,3 +1,0 @@
-type Subscription {
-  notificateMsg(roomId: String!): Message
-}

@@ -1,10 +1,10 @@
 import { prisma } from "../../../../generated/prisma-client";
-//import { ROOM_FRAGMENT } from "../../../fragments";
 import { isAuthenticated } from "../../../middlewares"
 
 export default {
     Query: {
         seeRoom: async (_, args, { request }) => {
+            console.log(request)
             isAuthenticated(request);
             const { user } = request;
             const { id } = args;

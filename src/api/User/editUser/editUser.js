@@ -7,7 +7,6 @@ export default {
             isAuthenticated(request);
 
             const { username, email, firstName, lastName, bio, avatar } = args;
-            console.log(avatar)
             const { user } = request;
             try {
              await prisma.updateUser({
