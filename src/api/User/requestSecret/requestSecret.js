@@ -9,7 +9,7 @@ export default {
             const { email } = args;
             const loginSecret = generateSecret();
             const exitst = await prisma.$exists.userLogin({ email });
-            console.log(loginSecret);
+            console.log("??????????????????????????????????/");
             if (exitst) {
                 return false
 
