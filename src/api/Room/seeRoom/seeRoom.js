@@ -4,7 +4,6 @@ import { isAuthenticated } from "../../../middlewares"
 export default {
     Query: {
         seeRoom: async (_, args, { request }) => {
-            console.log(request)
             isAuthenticated(request);
             const { user } = request;
             const { id } = args;
