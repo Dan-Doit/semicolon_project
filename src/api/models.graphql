@@ -23,7 +23,7 @@ type User {
   whofollow: [Notification]
   createdAt: String
   updatedAt: String
-  moToken: String!
+  moToken: String
   postsCount: Int!
   savedPosts: [Post!]
   state: String!

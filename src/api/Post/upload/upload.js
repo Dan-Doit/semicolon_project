@@ -7,6 +7,7 @@ export default {
             isAuthenticated(request);
 
             const { location, caption, files } = args;
+            console.log(files)
             const { user } = request;
 
             const post = await prisma.createPost({

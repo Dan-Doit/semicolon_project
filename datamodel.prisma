@@ -15,11 +15,10 @@ type User {
   commentLikes : [Comment!] @relation(name:"CommentLikesToUser")
   notifications: [Notification] @relation(name:"NotificationOfUser")
   whofollow : [Notification] @relation(name:"NotificationOfFrom")
-  moToken : String!
+  moToken : String
   rooms: [Room!]!
   savedPosts: [Post!] @relation(name:"SavedByUser")
   state : String! @default(value: "1")
-
   stories : [Story!] @relation(name:"StoriesToUser", onDelete:CASCADE)
   tagedUser : [Story!] @relation(name:"TagToStory")
   createdAt: DateTime! @createdAt
