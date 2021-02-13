@@ -23,51 +23,51 @@ const upload = multer({
   // 10MB
   limits: { fileSize: 1024 * 1024 * 10 },
 });
-
+// can upload 10 files
 export const uploadMiddleware = upload.array("file", 10);
-export const uploadController = (req, res) => {
+
+// a file upload (single)
+export const uploadSingleController = (req, res) => {
   const {
     file: { location }
   } = req;
-  console.log(location);
+  
   res.json({ location });
 };
-///////////////////////////////////////////////////////////////
-export const uploadProductsImages = async (req, res) => {
-  console.log("여기로 오긴함?")
-    uploadS3(req, res, (error) => {
-        console.log('files', req.file);
-        if (error) {
-            console.log('errors', error);
-            res.status(500).json({
-                status: 'fail',
-                error: error
-            });
-        } else {
-            // If File not found
-            if (req.file === undefined) {
-                console.log('uploadProductsImages Error: No File Selected!');
-                res.status(500).json({
-                    status: 'fail',
-                    message: 'Error: No File Selected'
-                });
-            } else {
-                // If Success
-                let fileArray = req.file,
-                    fileLocation;
-                const images = [];
-                for (let i = 0; i < fileArray.length; i++) {
-                    fileLocation = fileArray[i].location;
-                    console.log('filenm', fileLocation);
-                    images.push(fileLocation)
-                }
-                // Save the file name into database
-                return res.status(200).json({
-                    status: 'ok',
-                    filesArray: fileArray,
-                    locationArray: images
-                });
-            }
+
+// files upload (array)
+export const uploadArrayController = async (req, res, { error }) => {
+    if (error) {
+      console.log('errors', error);
+      res.status(500).json({
+        status: 'fail',
+        error: error
+      });
+    } else {
+      // If File not found
+      if (req.files === undefined) {
+        console.log('uploadProductsImages Error: No File Selected!');
+        res.status(500).json({
+          status: 'fail',
+          message: 'Error: No File Selected'
+        });
+      } else {
+        // If Success
+        let fileArray = req.files,
+          fileLocation;
+        const images = [];
+        for (let i = 0; i < fileArray.length; i++) {
+          fileLocation = fileArray[i].location;
+          console.log('Upload : ', fileLocation);
+          images.push(fileLocation)
         }
-    })
+        // Save the file name into database
+        return res.status(200).json({
+          status: 'ok',
+          filesArray: fileArray,
+          locationArray: images
+        });
+      }
+    }
 };
+
