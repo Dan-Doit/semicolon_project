@@ -14,5 +14,6 @@ export const getWeather = async (latitude,longitude) => {
     } else{ 
         throw error("날씨 정보를 얻을수 없습니다.");
     }
+
     return {};
 }

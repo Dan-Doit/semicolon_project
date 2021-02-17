@@ -19,16 +19,24 @@ type User {
   comments: [Comment!]!
   commentLikes: [Comment!]
   rooms: [Room!]!
-  notifications: [Notification]
-  whofollow: [Notification]
   createdAt: String
   updatedAt: String
-  moToken: String
   postsCount: Int!
   savedPosts: [Post!]
   state: String!
-  stories: [Story!]
+  stories: [Story]
+  clickedStories: [Story!]
   tagedUser: [Story!]
+  recommendation: Recommendation
+  notifications: [Notification]
+  whofollow: [Notification]
+  moToken: String
+}
+
+type Recommendation {
+  id: ID!
+  user: User!
+  post: [Post]
 }
 
 type UserLogin {
@@ -37,14 +45,24 @@ type UserLogin {
   loginSecret: String
 }
 
-type Story {
+type Hash {
   id: ID!
-  files: [File!]!
-  caption: String
-  user: User!
-  tagUser: [User!]
+  tag: String!
+  post: Post!
   createdAt: String
   updatedAt: String
+}
+
+type Story {
+  id: ID!
+  files: File
+  caption: String
+  user: User!
+  tagUser: [User]
+  seenUsers: [User!]
+  state: String!
+  createdAt: String!
+  updatedAt: String!
 }
 
 type Post {
@@ -58,12 +76,24 @@ type Post {
   comments: [Comment!]!
   isLiked: Boolean!
   likeCount: Int!
-  notifications: [Notification]
   createdAt: String
   updatedAt: String
   state: String!
   savedByUser: [User!]
-  hash: [String!]!
+  hashes: [Hash!]
+  notifications: [Notification]
+  recommendation: [Recommendation]
+}
+
+type Notification {
+  id: ID!
+  to: User
+  from: User
+  message: Room
+  post: Post
+  state: String!
+  createdAt: String
+  updatedAt: String
 }
 
 type Like {
@@ -96,7 +126,9 @@ type Comment {
 type File {
   id: ID!
   url: String!
-  post: Post!
+  type: String
+  post: Post
+  story: Story
   createdAt: String
   updatedAt: String
 }
@@ -116,17 +148,6 @@ type Message {
   from: User!
   to: User!
   room: Room!
-  createdAt: String
-  updatedAt: String
-}
-
-type Notification {
-  id: ID!
-  to: User
-  from: User
-  message: Room
-  post: Post
-  state: String!
   createdAt: String
   updatedAt: String
 }

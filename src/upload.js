@@ -12,7 +12,7 @@ const upload = multer({
   storage: multerS3({
     s3,
     acl: "public-read",
-    bucket: "teamsemicolon",
+    bucket: "semicolonsy",
     metadata: function (req, file, cb) {
       cb(null, { fieldName: file.fieldname });
     },
@@ -70,4 +70,3 @@ export const uploadArrayController = async (req, res, { error }) => {
       }
     }
 };
-
