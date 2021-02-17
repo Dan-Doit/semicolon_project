@@ -7,5 +7,6 @@ export const getRecommendation = async () => {
             return data;
         } catch (e) { 
             console.log("데이터가 존재 하지 않습니다.");
+            return [];
         }
 }
